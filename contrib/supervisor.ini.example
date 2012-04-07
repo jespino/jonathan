@@ -1,0 +1,23 @@
+[program:jonathan]
+command=uwsgi -s /tmp/jonathan.sock -b 50000 -w jonathan:app
+process_name=%(program_name)s
+numprocs=1
+directory=/path-to-jonathan/
+umask=022
+priority=999
+autostart=true
+autorestart=true
+startsecs=10
+startretries=3
+exitcodes=0,2
+stopsignal=TERM
+stopwaitsecs=10
+user=http
+stdout_logfile=/var/log/supervisor/jonathan.log
+stdout_logfile_maxbytes=1MB
+stdout_logfile_backups=10
+stdout_capture_maxbytes=1MB
+stderr_logfile=/var/log/supervisor/jonathan.error.log
+stderr_logfile_maxbytes=1MB
+stderr_logfile_backups=10
+stderr_capture_maxbytes=1MB

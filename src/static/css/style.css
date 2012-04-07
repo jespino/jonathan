@@ -1,0 +1,262 @@
+/* - - - - - - - - - - - - - - - - - - - - -
+
+Title :   Mighty Template
+Author :  James Broad
+URL :     kulor.com
+
+Created : 01.06.2006 
+
+- - - - - - - - - - - - - - - - - - - - - */
+
+/* ----- CSS ----- */
+
+*{
+    margin:0;
+    padding:0;
+}
+body, html{
+    margin:0;
+    padding:0;
+    background:#e7e7e7;
+    text-align:center;
+    margin-bottom:10px;
+    color: #000;
+    font:normal 12px/1.6em Verdana, Geneva, sans-serif;
+}
+a {
+    color:#578200;
+    text-decoration: none;
+}
+    a:hover {
+        color:#717171;
+        text-decoration:none;
+    }
+
+/* ----- IDS ----- */
+
+#container{
+    width:990px;
+    margin:10px auto;
+    padding:0;
+    background:#fff;
+    text-align:left;
+}
+
+/* ----- HEADER ----- */
+
+#logo{
+    margin:0;
+    padding:0;
+}
+
+#logo #box{
+    float:left;
+    clear:none;
+    height:40px;
+    width:40px;
+    margin:0;
+    padding:0;
+    background:#394E06;
+    color:#87B220;
+    font-weight:bold;
+    font-size:15px;
+    line-height:40px;
+    letter-spacing:-2px;
+    text-indent:-2px;   
+}
+
+.subContainer, #navigation ul{
+    width:990px;
+    margin:0 auto;    
+}
+#header{
+    text-align:left;
+    margin:0;
+    padding:30px 0 0 10px;
+    height:64px;
+    background:#87b220;
+}
+
+/* ----- HEADINGS ----- */
+
+h2{
+    font-size:25px;
+    letter-spacing:-1px;
+    margin-top:15px;
+    margin-bottom:0px;
+    font-weight:normal;
+    color:#718e3e;
+}
+h3{
+    text-align: center;
+    font-size:20px;
+    letter-spacing:-1px;
+    margin-top:15px;
+    margin-bottom:15px;
+    margin-left:10px;
+    font-weight:normal;
+    color:#718e3e;
+}
+
+/* ----- PARAGRAPHS ----- */
+
+p{
+    color:#043f4a;
+    text-align: justify;
+}
+
+/* ----- FORMS ----- */
+
+input{
+    background-color: #FFF;
+    color: #999999;
+    border: 1px solid #CCC;
+    font-size: 11px;
+    padding: 3px;
+    width:160px;              
+}
+button{
+    background-color:#EFEFEF;
+    line-height:11px;
+    color: #000;
+    border: 1px solid #CCC;
+    font-size: 11px;
+    height:20px;
+    margin: 0;
+    padding: 0 5px;
+}
+form p{
+    padding:2px 0;
+}
+
+/* ----- IMAGES ----- */
+
+img {
+    border:0;
+}
+img a {
+    border:0;
+    text-decoration:none;
+}
+img a:hover {
+    border:none;
+}
+
+/* ----- CONTENT ----- */
+
+#primaryContentWide{
+    width:990px;
+    /*padding:20px 55px;*/
+    font-size:14px;
+    float:left;
+    clear:none; 
+}
+#primaryContentWide ul{
+    list-style: none;
+}
+
+/* ----- FOOTER ----- */
+
+#footer{
+    margin:0 auto;
+    margin-bottom:10px;
+    height:10px;
+    padding:18px 20px;
+    clear:both;
+    width:740px;
+    text-align:left;
+    font-size:10px;
+    color:#484848;
+    background:#f4f4f4;
+}
+    #footer ul{
+        list-style:none;    
+    }
+    #footer li{
+        list-style:none;
+        display:inline;    
+    }
+    #footer #copyright{
+        float:left;
+        clear:none;
+    }
+    #footer #links{
+        float:right;
+        clear:none;
+    }
+    #footer a{
+        color:#606060;
+        text-decoration:none;
+    }
+    #footer a:hover{
+        color:#ccc;
+        text-decoration:underline;
+    }
+
+/* ----- CLASSES ----- */
+
+.clear{
+    clear:both;
+}
+
+/**** APP ****/
+/*** Comments ***/
+form { width: 100%; padding: 0px; }
+fieldset { padding: 6px 13px; }
+
+#CommentBody { height: 100px; }
+
+div.buttons {
+    margin: 10px;
+}
+
+div.buttons ul{
+    list-style-type: none;
+    text-align: center;
+}
+
+div.buttons li{
+    display: inline;
+}
+
+#navlist {
+    padding: 15px;
+}
+
+.green { color: #578200;}
+
+#logo h1 { 
+    margin-top: 25px;
+    margin-left: 10px;
+    letter-spacing: -0.1em;
+    font-size: 2.5em;
+    color: white;
+}
+li.link {
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+li.link span {
+    position: relative;
+    bottom: 13px;
+    padding-left: 8px;
+}
+ 
+li.link:hover {
+    background: #dddddd;
+}
+
+#back_link{
+    float: left;
+    padding-left: 10px;
+}
+
+#back_link span{
+    position:relative;
+    bottom: 11px;
+}
+#content {
+    text-align:center;
+}

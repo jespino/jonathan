@@ -1,0 +1,11 @@
+location ~ ^/jonathan/static/(.*)$ { alias /path-to-jonathan/static/$1; }
+location ~ ^/jonathan/media/(.*)$ { alias /path-to-jonathan/media/$1; }
+
+location = /jonathan { rewrite ^ /jonathan/; }
+location /jonathan { try_files $uri @jonathan; }
+location @jonathan {
+  include uwsgi_params;
+  uwsgi_param SCRIPT_NAME /jonathan;
+  uwsgi_modifier1 30;
+  uwsgi_pass unix:/tmp/jonathan.sock;
+}
