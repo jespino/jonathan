@@ -16,6 +16,7 @@ PLAYER = "divx"
 AUTOPLAY = "1"
 TITLE = "El Jonathan"
 VALID_EXTENSIONS = [ '.mpg', '.mpeg', '.ogg', '.ogm', '.ogv', '.divx', '.avi', '.webm', '.mkv', '.mov' ]
+IGNORE_POINT_PATH = True
 
 # create our little application :)
 app = Flask(__name__)
@@ -35,6 +36,8 @@ def home(path):
     pwd = os.path.join(MEDIA_DIR,path)
     if os.path.isdir(pwd):
         entries = os.listdir(pwd)
+        if IGNORE_POINT_PATH:
+            entries = filter(lambda x: x[0] != ".", entries)
 
         dirs = [ entry for entry in entries if os.path.isdir(os.path.join(pwd, entry)) ]
         files = [ entry for entry in entries if os.path.isfile(os.path.join(pwd, entry)) ]
