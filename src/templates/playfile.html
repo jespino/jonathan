@@ -14,8 +14,8 @@
         <object classid="clsid:67DABFBF-D0AB-41fa-9C46-CC0F21721616" width="800" height="600" codebase="http://go.divx.com/plugin/DivXBrowserPlugin.cab">
             <param name="custommode" value="none" />
             <param name="autoPlay" value="{{autoplay}}" />
-            <param name="src" value="{{ url_for('media', filename=path) }}" />
-            <embed type="video/divx" src="{{ url_for('media', filename=path) }}" custommode="none" width="800" height="600" autoPlay="{{autoplay}}"  pluginspage="http://go.divx.com/plugin/download/"></embed>
+            <param name="src" value="{{baseurl}}{{ url_for('media', filename=path) }}" />
+            <embed type="video/divx" src="{{baseurl}}{{ url_for('media', filename=path) }}" custommode="none" width="800" height="600" autoPlay="{{autoplay}}"  pluginspage="http://go.divx.com/plugin/download/"></embed>
         </object>
     {% elif player == "vlc" %}
   	    <object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921"
@@ -36,7 +36,7 @@
   	           width="800"
   	           height="600"
   	           name="vlc"
-               target="{{ url_for('media', filename=path) }}">
+               target="{{baseurl}}{{ url_for('media', filename=path) }}">
   	    </embed>
   	    </object>
     {% elif player == "wmp" %}
@@ -44,31 +44,31 @@
           classid='CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95' 
           codebase='http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701'
           standby='Loading Microsoft Windows Media Player components...' type='application/x-oleobject'>
-          <param name='fileName' value="{{ url_for('media', filename=path) }}">
+          <param name='fileName' value="{{baseurl}}{{ url_for('media', filename=path) }}">
           <param name='animationatStart' value='true'>
           <param name='transparentatStart' value='true'>
           <param name='autoStart' value="{{autoplay}}">
           <param name='showControls' value="true">
           <param name='loop' value="false">
           <EMBED type='application/x-mplayer2'
-          pluginspage='http://microsoft.com/windows{{ url_for('media', filename=path) }}/download/'
+          pluginspage='http://microsoft.com/windows/download/'
             id='mediaPlayer' name='mediaPlayer' displaysize='4' autosize='-1' 
             bgcolor='darkblue' showcontrols="true" showtracker='-1' 
             showdisplay='0' showstatusbar='-1' videoborder3d='-1' width="800" height="600"
-            src="{{ url_for('media', filename=path) }}" autostart="{{autoplay}}" designtimesp='5311' loop="false">
+            src="{{baseurl}}{{ url_for('media', filename=path) }}" autostart="{{autoplay}}" designtimesp='5311' loop="false">
           </EMBED>
         </OBJECT>
     {% elif player == "quicktime" %}
         <OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="800" height="600" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
-            <param name='src' value="{{ url_for('media', filename=path) }}">
+            <param name='src' value="{{baseurl}}{{ url_for('media', filename=path) }}">
             <param name='autoplay' value="{{autoplay}}">
             <param name='controller' value="true">
             <param name='loop' value="false">
-            <EMBED src="{{ url_for('media', filename=path) }}" width="800" height="600" autoplay="{{autoplay}}" controller="true" loop="false" pluginspage='http://www.apple.com/quicktime/download/'>
+            <EMBED src="{{baseurl}}{{ url_for('media', filename=path) }}" width="800" height="600" autoplay="{{autoplay}}" controller="true" loop="false" pluginspage='http://www.apple.com/quicktime/download/'>
             </EMBED>
         </OBJECT>
     {% elif player == "html5" %}
-        <video width="800px" height="600px" src="{{ url_for('media', filename=path) }}" id="mediaplayer_video" tabindex="0" autoplay="{{autoplay}}" autobuffer="">Unable to display media.</video>
+        <video width="800px" height="600px" src="{{baseurl}}{{ url_for('media', filename=path) }}" id="mediaplayer_video" tabindex="0" autoplay="{{autoplay}}" autobuffer="">Unable to display media.</video>
     {% endif %}
 </div>
 

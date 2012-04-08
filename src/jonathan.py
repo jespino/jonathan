@@ -7,16 +7,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
              abort, render_template, flash
 from flask.helpers import send_from_directory
 
-# configuration
-DEBUG = True
-SECRET_KEY = 'development key'
-MEDIA_DIR = 'media/'
-MEDIA_URL = '/media/'
-PLAYER = "divx"
-AUTOPLAY = "1"
-TITLE = "El Jonathan"
-VALID_EXTENSIONS = [ '.mpg', '.mpeg', '.ogg', '.ogm', '.ogv', '.divx', '.avi', '.webm', '.mkv', '.mov' ]
-IGNORE_POINT_PATH = True
+from settings import *
 
 # create our little application :)
 app = Flask(__name__)
@@ -42,6 +33,9 @@ def home(path):
         dirs = [ entry for entry in entries if os.path.isdir(os.path.join(pwd, entry)) ]
         files = [ entry for entry in entries if os.path.isfile(os.path.join(pwd, entry)) ]
 
+        dirs.sort()
+        files.sort()
+
         # Filter files by extension
         files = filter(lambda x: os.path.splitext(x)[1] in VALID_EXTENSIONS, files)
 
@@ -49,7 +43,7 @@ def home(path):
     elif os.path.isfile(pwd):
         if not os.path.splitext(path)[1] in VALID_EXTENSIONS:
             abort(404)
-        return render_template('playfile.html', path=path, player=PLAYER, autoplay=AUTOPLAY, title=TITLE)
+        return render_template('playfile.html', path=path, player=PLAYER, autoplay=AUTOPLAY, title=TITLE, baseurl=BASE_URL)
     else:
         abort(404)
 
