@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 # all the imports
-import sqlite3
 import os
 from flask import Flask, request, session, g, redirect, url_for, \
              abort, render_template, flash
@@ -30,8 +29,8 @@ def home(path):
         if IGNORE_POINT_PATH:
             entries = filter(lambda x: x[0] != ".", entries)
 
-        dirs = [ entry for entry in entries if os.path.isdir(os.path.join(pwd, entry)) ]
-        files = [ entry for entry in entries if os.path.isfile(os.path.join(pwd, entry)) ]
+        dirs = [ entry for entry in entries if os.path.isdir(os.path.join(pwd, entry).encode('utf-8')) ]
+        files = [ entry for entry in entries if os.path.isfile(os.path.join(pwd, entry).encode('utf-8')) ]
 
         dirs.sort()
         files.sort()
