@@ -23,9 +23,10 @@
 
         {% for file in files %}
             <li class='link'>
-                <a href='{{ url_for('home', path='%s/%s' % (path, file)) }}'>
+                <a href='{{ url_for('home', path='%s/%s' % (path, file)) }}' class="file">
                     <img src='{{ url_for('static', filename="img/file.png") }}'>
                     <span>{{file}}</span>
+                    <span class="last_view_date"></span>
                 </a>
             </li>
         {% endfor %}
