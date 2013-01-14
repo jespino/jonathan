@@ -2,7 +2,7 @@
 DEBUG = True
 SECRET_KEY = 'development key'
 MEDIA_DIR = 'media/'
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media'
 PLAYER = "divx"
 AUTOPLAY = "1"
 TITLE = "El Jonathan"

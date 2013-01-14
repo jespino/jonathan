@@ -5,27 +5,27 @@
     <ul>
         {% if path != "" and path != "/" %}
             <li class='link'>
-            <a href='{{ url_for('home', path='%s' % (path|dirname)) }}'>
+            <a href='{{ url_for('display_path', path='%s' % (path|dirname)) }}'>
                     <img src='{{ url_for('static', filename="img/folder.png") }}'>
-                    <span>[Parent Directory]</span>
+                    <span class="parent">[Parent Directory]</span>
                 </a>
             </li>
         {% endif %}
 
         {% for dir in dirs %}
             <li class='link'>
-                <a href='{{ url_for('home', path='%s/%s' % (path, dir)) }}'>
+                <a href='{{ url_for('display_path', path='%s/%s' % (path, dir)) }}'>
                     <img src='{{ url_for('static', filename="img/folder.png") }}'>
-                    <span>{{dir}}</span>
+                    <span class="folder">{{dir}}</span>
                 </a>
             </li>
         {% endfor %}
 
         {% for file in files %}
             <li class='link'>
-                <a href='{{ url_for('home', path='%s/%s' % (path, file)) }}' class="file">
+                <a href='{{ url_for('display_path', path='%s/%s' % (path, file)) }}' class="file">
                     <img src='{{ url_for('static', filename="img/file.png") }}'>
-                    <span>{{file}}</span>
+                    <span class="file">{{file}}</span>
                     <span class="last_view_date"></span>
                 </a>
             </li>

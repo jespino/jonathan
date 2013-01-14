@@ -4,7 +4,7 @@
 
 <div id="content">
     <span id='back_link'>
-        <a href='{{ url_for('home', path='%s' % path|dirname) }}'>
+        <a href='{{ url_for('display_path', path='%s' % path|dirname) }}'>
             <img src='{{ url_for('static', filename="img/prev.png") }}' />
             <span>Back</span>
         </a>

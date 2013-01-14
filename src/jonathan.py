@@ -6,11 +6,11 @@ from flask import Flask, request, session, g, redirect, url_for, \
              abort, render_template, flash
 from flask.helpers import send_from_directory
 
-from settings import *
+import settings
 
 # create our little application :)
 app = Flask(__name__)
-app.config.from_object(__name__)
+app.config.from_object(settings)
 
 @app.template_filter('dirname')
 def dirname_filter(path):
@@ -22,33 +22,61 @@ def filename_filter(path):
 
 @app.route('/', defaults={'path':''})
 @app.route('/<path:path>')
-def home(path):
-    pwd = os.path.join(MEDIA_DIR,path)
-    if os.path.isdir(pwd):
-        entries = os.listdir(pwd)
-        if IGNORE_POINT_PATH:
-            entries = filter(lambda x: x[0] != ".", entries)
-
-        dirs = [ entry for entry in entries if os.path.isdir(os.path.join(pwd, entry).encode('utf-8')) ]
-        files = [ entry for entry in entries if os.path.isfile(os.path.join(pwd, entry).encode('utf-8')) ]
-
-        dirs.sort()
-        files.sort()
-
-        # Filter files by extension
-        files = filter(lambda x: os.path.splitext(x)[1] in VALID_EXTENSIONS, files)
-
-        return render_template('listdir.html', path=path, dirs=dirs, files=files, title=TITLE)
-    elif os.path.isfile(pwd):
-        if not os.path.splitext(path)[1] in VALID_EXTENSIONS:
-            abort(404)
-        return render_template('playfile.html', path=path, player=PLAYER, autoplay=AUTOPLAY, title=TITLE, baseurl=BASE_URL)
+def display_path(path):
+    real_path = os.path.join(app.config['MEDIA_DIR'], path)
+    if os.path.isdir(real_path):
+        return __display_directory(path)
+    elif os.path.isfile(real_path):
+        return __display_file(path)
     else:
         abort(404)
 
-@app.route(MEDIA_URL + '/<path:filename>', endpoint='media')
+@app.route(app.config['MEDIA_URL'] + '/<path:filename>', endpoint='media')
 def send_media_file(filename):
-    return send_from_directory(MEDIA_DIR, filename)
+    __valid_path_extension_or_404(os.path.join(app.config['MEDIA_DIR'], filename))
+    return send_from_directory(app.config['MEDIA_DIR'], filename)
+
+def __display_directory(path):
+    real_path = os.path.join(app.config['MEDIA_DIR'], path)
+
+    (files, dirs) = __get_files_and_directories(real_path)
+
+    dirs.sort()
+    files.sort()
+
+    files = __filter_files_without_valid_extension(files)
+
+    return render_template('listdir.html', path=path, dirs=dirs, files=files, title=app.config['TITLE'])
+
+def __display_file(path):
+    __valid_path_extension_or_404(path)
+
+    return render_template(
+            'playfile.html',
+            path=path,
+            player=app.config['PLAYER'],
+            autoplay=app.config['AUTOPLAY'],
+            title=app.config['TITLE'],
+            baseurl=app.config['BASE_URL']
+    )
+
+def __get_files_and_directories(real_path):
+    entries = os.listdir(real_path)
+
+    if app.config['IGNORE_POINT_PATH']:
+        entries = filter(lambda x: x[0] != ".", entries)
+
+    dirs = [ entry for entry in entries if os.path.isdir(os.path.join(real_path, entry).encode('utf-8')) ]
+    files = [ entry for entry in entries if os.path.isfile(os.path.join(real_path, entry).encode('utf-8')) ]
+
+    return (files, dirs)
+
+def __filter_files_without_valid_extension(files):
+    return filter(lambda x: os.path.splitext(x)[1] in app.config['VALID_EXTENSIONS'], files)
+
+def __valid_path_extension_or_404(path):
+    if not os.path.splitext(path)[1] in app.config['VALID_EXTENSIONS']:
+        abort(404)
 
 if __name__ == '__main__':
     app.run()
